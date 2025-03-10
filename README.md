@@ -39,12 +39,14 @@
    adb devices
    ```
    将连接到的设备名在`config.py`文件内配置
-2. 克隆本仓库
+
+3. 克隆本仓库
    ```bash
    git clone https://github.com/helxo0321/COC_robot_python.git
    cd COC_robot_python
    ```
-3. 安装Python依赖
+
+4. 安装Python依赖
    ```bash
    pip install -r requirements.txt
    ```
