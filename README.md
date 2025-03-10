@@ -19,32 +19,43 @@
 ## 🛠️ 环境配置
 
 ### 前置要求
-- Windows 10/11 或 macOS
+- Windows 10/11 
 - 安卓模拟器（推荐[雷电模拟器](https://www.ldmnq.com)）
 - Python 3.9+
 
 ### 使用步骤
-1. 安装ADB工具
+1. 安装雷声模拟器
+   创建一个模拟器，打开开发者模式内的USB调试
+   下载部落冲突，登录账号
+
+2. 配置ADB工具
    ```bash
    curl -O https://dl.google.com/android/repository/platform-tools-latest-windows.zip
    unzip platform-tools-latest-windows.zip
    ```
+   将ADB工具添加至系统环境变量
+   在终端运行以下命令查看是否成功连接设备
+   ```bash
+   adb devices
+   ```
+   将连接到的设备名在`config.py`文件内配置
 2. 克隆本仓库
    ```bash
-   git clone https://github.com/helxo0321/COC_robot.git
-   cd COC_robot
+   git clone https://github.com/helxo0321/COC_robot_python.git
+   cd COC_robot_python
    ```
 3. 安装Python依赖
    ```bash
    pip install -r requirements.txt
    ```
+   
 
 ## ⚙️ 配置说明
 
 ### 基础配置 (`config.py`)
 ```python
 adb_path = 'C:/PATH/platform-tools/adb.exe'  # 修改为你的ADB路径
-device_vm_size = 0  # 0: 1080x2400 | 1: 720x1280
+device_name = "  "  # 模拟器的设备名称
 ```
 
 ### 模拟器设置
