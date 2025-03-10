@@ -143,6 +143,3 @@ def find_template_position(...,
 ## 📄 开源协议
 本项目采用 MIT License，请遵守Supercell的[粉丝内容政策](https://www.supercell.com/fan-content-policy)
 ```
-
-![操作演示](images/demo.gif)  
-*实际运行效果演示*
