@@ -1,145 +1,144 @@
-```markdown
-# COC Robot - 部落冲突自动化助手
+基于Python计算机视觉和ADB的《部落冲突》智能自动化系统，支持全分辨率适配多种模拟器
+无需Root即可实现资源收集、兵种管理等核心功能。
 
-一个基于ADB和计算机视觉的《部落冲突》自动化脚本，支持资源收集、兵种捐赠、自动训练等功能。
-无需Root，兼容主流安卓模拟器。
+🏰 COC Robot - 部落冲突自动化助手
+[![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![ADB Required](https://img.shields.io/badge/ADB-34.0.5+-orange.svg)](https://developer.android.com/studio/releases/platform-tools)
 
-## ✨ 主要功能
+!!![部落冲突自动化演示](images/demo.gif)
 
-- **智能资源收集**  
-  自动识别并收集金币/圣水/黑油
-- **一键捐兵系统**  
-  支持雷龙等兵种快速捐赠（可扩展）
-- **兵营自动化管理**  
-  捐兵后自动补兵，支持批量训练
-- **多分辨率适配**  
-  720P/1080P/2K设备开箱即用
-- **智能异常处理**  
-  自动识别弹窗并重连游戏
 
-## 🛠️ 环境配置
+🌟 核心功能
 
-### 前置要求
-- Windows 10/11 
-- 安卓模拟器（推荐[雷电模拟器](https://www.ldmnq.com)）
-- Python 3.9+
+| 功能模块         | 支持特性                                                                 |
+|------------------|-------------------------------------------------------------------------|
+| 🔄 资源收集       | 自动识别金币/圣水/黑油，智能规避障碍物                                   |
+| 🐉 兵种管理       | 雷龙/气球批量捐赠，训练队列自动补兵                                      |
+| 🖥️ 多分辨率适配   | 动态适配 720P/1080P/2K 设备                                             |
+| 🚨 异常处理       | 断线重连/弹窗拦截/操作失败自动重试                                       |
 
-### 使用步骤
-1. 安装雷声模拟器
-   创建一个模拟器，打开开发者模式内的USB调试
-   下载部落冲突，登录账号
+🚀 快速开始
 
-2. 配置ADB工具
-   ```bash
-   curl -O https://dl.google.com/android/repository/platform-tools-latest-windows.zip
-   unzip platform-tools-latest-windows.zip
-   ```
-   将ADB工具添加至系统环境变量
-   在终端运行以下命令查看是否成功连接设备
-   ```bash
-   adb devices
-   ```
-   将连接到的设备名在`config.py`文件内配置
+### 环境要求
+- Windows 10/11 64位
+- 雷电模拟器 9.0+ ([下载地址](https://www.ldmnq.com))
+- Python 3.9+ ([下载地址](https://www.python.org/downloads/))
 
-3. 克隆本仓库
-   ```bash
-   git clone https://github.com/helxo0321/COC_robot_python.git
-   cd COC_robot_python
-   ```
+### 五分钟部署指南
 
-4. 安装Python依赖
-   ```bash
-   pip install -r requirements.txt
-   ```
-   
+1. **配置模拟器**
+    - 安装雷电模拟器
+   # 创建新实例
+   - 分辨率: 1080x2400
+   - DPI: 440
+   - 开启: USB调试/ROOT权限
 
-## ⚙️ 配置说明
+2. **安装依赖**
+    ```bash
+    curl -O https://dl.google.com/android/repository/platform-tools-latest-windows.zip
+    unzip platform-tools-latest-windows.zip
+    ```
+    将ADB工具添加至系统环境变量
+    在终端运行以下命令查看是否成功连接设备
+    ```bash
+    adb devices
+    ```
+    将连接到的设备名在`config.py`文件内配置
 
-### 基础配置 (`config.py`)
-```python
-adb_path = 'C:/PATH/platform-tools/adb.exe'  # 修改为你的ADB路径
-device_name = "  "  # 模拟器的设备名称
-```
+    git clone https://github.com/yourname/COC_robot.git
+    cd COC_robot
+    pip install -r requirements.txt
 
-### 模拟器设置
-- 分辨率：1080x2400 (DPI 440)
-- 开启USB调试模式
-- 性能设置：4核CPU/4096MB内存
+    或使用VSCODE自带的conda创建虚拟环境
 
-## 🖼️ 模板系统
+3. **ADB连接验证**
+    adb devices
+    # 在config.py中配置设备ID
 
-### 现有模板
-```
-modle/
-├── heiyoushouji.png    # 黑油收集按钮
-├── zengyuan_leilong.png # 雷龙捐赠图标
-├── jingong.png         # 进攻按钮
-└── ... (共23个预置模板)
-```
+4. **首次运行**
+   python command.py --function command_1  # 测试全局识别功能
 
-### 添加新模板
-1. 截取游戏界面元素（推荐使用ADB截图）
-2. 将图片保存到`modle`目录
-3. 在`template_labels.py`注册新模板
-```python
-template_labels = {
-    'new_template.png': True,
-    #...
-}
-```
+⚙️ 核心配置
 
-## 🚀 使用指南
+    设备配置文件 (config.py)
+    # ADB 路径配置
+    adb_path = 'C:/platform-tools/adb.exe'  # ← 修改为实际路径
 
-### 基础操作
-```python
-# 主程序入口
-python main.py
+    # 设备分辨率模式
+    DEVICE_PROFILES = {
+    0: {'name': '1080P', 'size': (1080, 2400)},
+    1: {'name': '720P',  'size': (720, 1280)}
+    }
 
-# 单独功能测试
-python command.py --function donate  # 测试捐兵功能
-python command.py --function collect # 测试资源收集
-```
+    模板管理系统
+    modle/
+    ├── UI_Elements/
+    │   ├── collect/      # 资源收集相关模板
+    │   ├── donate/       # 兵种捐赠相关模板
+    │   └── system/       # 系统界面模板
+    └── sample_template.png  # 模板制作规范示例
 
-### 高级参数
-```python
-# 在template_match.py中调整匹配参数
-def find_template_position(...,
-    threshold=0.75,   # 匹配置信度阈值
-    min_scale=0.5,    # 最小缩放比例
-    max_scale=2.0,    # 最大缩放比例
-    steps=20          # 多尺度检测粒度
-)
-```
+🛠️ 高级使用
+    ### 添加新模板
+    1. 截取游戏界面元素（推荐使用ADB截图）
+    2. 将图片保存到`modle`目录
+    3. 在`template_labels.py`注册新模板
+    ```python
+    template_labels = {
+        'new_template.png': True,
+        #...
+    }
 
-## 📌 注意事项
+    ### 单独功能测试
+    python command.py --function donate  # 测试捐兵功能
+    python command.py --function collect # 测试资源收集功能
 
-1. **游戏设置要求**
-   - 使用简体中文界面
-   - 尽量关闭所有特效和动画
-   - 保持游戏缩放比例为默认
+    ### 自定义手势操作
+    # 在adb_swipe_utils.py中扩展手势库
+    def custom_swipe_pattern():
+        multi_touch_zoom(
+            start_x1=300, start_y1=800, 
+            end_x1=500, end_y1=500,
+            steps=15,  # 增加操作精度
+            duration=300
+        )
+    ### 高级参数调整
+    # 在template_match.py中调整匹配参数
+    def find_template_position(...,
+        threshold=0.75,   # 匹配置信度阈值
+        min_scale=0.75,    # 最小缩放比例
+        max_scale=2.0,    # 最大缩放比例
+        steps=20          # 多尺度检测粒度
+    )
 
-2. **性能优化**
-   - 为模拟器开启VT虚拟化
-   - 关闭Windows Defender实时保护
-   - 优先使用雷电模拟器9.0+版本
+🚨 故障排查
+    Q: ADB设备未连接
+    A: adb kill-server && adb start-server
+    # 检查模拟器USB调试开关
 
-3. **常见问题**
-   ```markdown
-   Q: 脚本无法识别界面元素
-   A: 1. 检查模板图片是否匹配当前分辨率
-      2. 单独运行python command.py --function command_1，观察并调试识别效果
+    Q: ADB连接不稳定
+    A: 1. adb kill-server && adb start-server
+       2. 重启模拟器
 
-   Q: ADB连接不稳定
-   A: 1. adb kill-server && adb start-server
-      2. 重启模拟器
-   ```
+    Q: 脚本无法识别界面元素
+    A: 1. 检查模板图片是否匹配当前分辨率
+       2. 单独运行python command.py --function command_1，观察并调试识别效果
+       2. 该模版是否成功添加
 
-## 🤝 参与贡献
-欢迎提交PR或Issue：
-1. 添加新的游戏模板
-2. 优化手势操作算法
-3. 扩展多语言支持
+    Q: 手势操作不生效
+    A: 1. # 在adb_swipe_utils.py中调整duration参数
+        def swipe_down(duration=800):  # 增加操作时长
+            adb_command(f"shell input swipe 250 1000 250 300 {duration}")
+       2. 检查操作坐标是否正确
 
-## 📄 开源协议
+🤝 贡献指南
+    我们欢迎以下类型的贡献：
+    🎯 新增游戏界面模板
+    🧩 优化图像识别算法
+    📊 完善测试用例
+    📝 补充多语言文档
+    请遵循 贡献规范 提交PR。
+
+📄 开源协议
 本项目采用 MIT License，请遵守Supercell的[粉丝内容政策](https://www.supercell.com/fan-content-policy)
-```
