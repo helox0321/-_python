@@ -1,8 +1,6 @@
 ```markdown
 # COC Robot - 部落冲突自动化助手
 
-![部落冲突游戏截图](images/yolo_valid_5.png)
-
 一个基于ADB和计算机视觉的《部落冲突》自动化脚本，支持资源收集、兵种捐赠、自动训练等功能。无需Root，兼容主流安卓模拟器。
 
 ## ✨ 主要功能
@@ -25,7 +23,7 @@
 - 安卓模拟器（推荐[雷电模拟器](https://www.ldmnq.com)）
 - Python 3.9+
 
-### 安装步骤
+### 使用步骤
 1. 安装ADB工具
    ```bash
    curl -O https://dl.google.com/android/repository/platform-tools-latest-windows.zip
@@ -33,7 +31,7 @@
    ```
 2. 克隆本仓库
    ```bash
-   git clone https://github.com/yourname/COC_robot.git
+   git clone https://github.com/helxo0321/COC_robot.git
    cd COC_robot
    ```
 3. 安装Python依赖
@@ -102,8 +100,8 @@ def find_template_position(...,
 ## 📌 注意事项
 
 1. **游戏设置要求**
-   - 使用英文/简体中文界面
-   - 关闭所有特效和动画
+   - 使用简体中文界面
+   - 尽量关闭所有特效和动画
    - 保持游戏缩放比例为默认
 
 2. **性能优化**
@@ -115,7 +113,7 @@ def find_template_position(...,
    ```markdown
    Q: 脚本无法识别界面元素
    A: 1. 检查模板图片是否匹配当前分辨率
-      2. 运行tools/yolo_test.py调试识别效果
+      2. 单独运行python command.py --function command_1，观察并调试识别效果
 
    Q: ADB连接不稳定
    A: 1. adb kill-server && adb start-server
